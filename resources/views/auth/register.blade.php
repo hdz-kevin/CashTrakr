@@ -5,7 +5,7 @@
 @endsection
 
 @section('auth-contents')
-<form class="space-y-5" novalidate>
+<form method="POST" action="{{ route('register.store') }}" class="space-y-5" novalidate>
     <div class="space-y-2">
         <label class="font-bold text-2xl block" for="name">Nombre</label>
 
@@ -55,6 +55,7 @@
     <input
         type="submit"
         value='Registrarme'
-        class="bg-purple-950 hover:bg-purple-800 w-full p-3 rounded-lg text-white font-bold  text-xl cursor-pointer" />
+        class="bg-purple-950 hover:bg-purple-800 w-full p-3 rounded-lg text-white font-bold  text-xl cursor-pointer"
+    />
 </form>
 @endsection

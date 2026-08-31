@@ -23,14 +23,14 @@
                 </div>
                 <nav class="flex flex-col lg:flex-row gap-4 items-center">
                     <a
-                        href="{{ route('auth.login') }}"
-                        class="font-bold uppercase {{ Route::currentRouteName() === 'auth.login' ? 'text-amber-500' : 'hover:text-amber-500' }}"
+                        href="{{ route('login') }}"
+                        class="font-bold uppercase {{ Route::currentRouteName() === 'login' ? 'text-amber-500' : 'hover:text-amber-500' }}"
                     >
                         Iniciar Sesión
                     </a>
                     <a
-                        href="{{ route('auth.register') }}"
-                        class="font-bold uppercase {{ Route::currentRouteName() === 'auth.register' ? 'text-amber-500' : 'hover:text-amber-500' }}"
+                        href="{{ route('register') }}"
+                        class="font-bold uppercase {{ Route::currentRouteName() === 'register' ? 'text-amber-500' : 'hover:text-amber-500' }}"
                     >
                         Crear Cuenta
                     </a>
