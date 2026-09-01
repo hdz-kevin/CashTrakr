@@ -6,7 +6,6 @@
             @yield('title')
         </h1>
 
-        {{-- Forms --}}
         @yield('auth-contents')
     </main>
 @endsection

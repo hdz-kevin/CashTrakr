@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -18,3 +19,15 @@ Route::get('/register', [RegisterController::class, 'create'])->name('register')
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 Route::get('/login', [LoginController::class, 'create'])->name('login');
+
+Route::get('/email/verify', fn () => view('auth.verify-email'))
+    ->middleware(['auth'])
+    ->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return "Email verified successfully";
+})
+    ->middleware(['auth', 'signed'])
+    ->name('verification.verify');
