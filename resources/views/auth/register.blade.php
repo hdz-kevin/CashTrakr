@@ -15,7 +15,13 @@
             placeholder="Tu Nombre"
             class="w-full border border-gray-300 p-3 rounded-lg"
             name="name"
+            value="{{ old('name') }}"
+            autofocus
         />
+
+        @error('name')
+            <p class="text-red-500 text-sm">{{ $message }}</p>
+        @enderror
     </div>
 
     <div class="space-y-2">
@@ -27,7 +33,12 @@
             placeholder="Email de Registro"
             class="w-full border border-gray-300 p-3 rounded-lg"
             name="email"
+            value="{{ old('email') }}"
         />
+
+        @error('email')
+            <p class="text-red-500 text-sm">{{ $message }}</p>
+        @enderror
     </div>
 
     <div class="space-y-2">
@@ -39,6 +50,10 @@
             class="w-full border border-gray-300 p-3 rounded-lg"
             name="password"
         />
+
+        @error('password')
+            <p class="text-red-500 text-sm">{{ $message }}</p>
+        @enderror
     </div>
 
     <div class="space-y-2">
