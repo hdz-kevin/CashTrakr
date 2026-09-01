@@ -29,7 +29,8 @@ class RegisterRequest extends FormRequest
             'password' => [
                 'required',
                 'string',
-                Password::min(8)->letters()->numbers()->symbols()->uncompromised(),
+                // TODO: Uncomment this on production
+                Password::min(8), //->letters()->numbers()->symbols()->uncompromised(),
                 'confirmed'
             ],
         ];
