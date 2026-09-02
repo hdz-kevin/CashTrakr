@@ -15,19 +15,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => view('welcome'))->name('home');
 
+Route::get('/dashboard', fn () => view('dashboard'))->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
+
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 Route::get('/login', [LoginController::class, 'create'])->name('login');
 
-Route::get('/email/verify', fn () => view('auth.verify-email'))
+Route::get('verification/notice', fn () => view('auth.verify-email'))
     ->middleware(['auth'])
     ->name('verification.notice');
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+Route::get('/verification/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return "Email verified successfully";
+    return redirect()
+        ->route('dashboard')
+        ->with('success', 'Email verificado correctamente. Ya puedes crear y administrar presupuestos.');
 })
     ->middleware(['auth', 'signed'])
     ->name('verification.verify');
