@@ -19,9 +19,7 @@
             autofocus
         />
 
-        @error('name')
-            <p class="text-red-500 text-sm">{{ $message }}</p>
-        @enderror
+        <x-input-error field="name" />
     </div>
 
     <div class="space-y-2">
@@ -36,9 +34,7 @@
             value="{{ old('email') }}"
         />
 
-        @error('email')
-            <p class="text-red-500 text-sm">{{ $message }}</p>
-        @enderror
+        <x-input-error field="email" />
     </div>
 
     <div class="space-y-2">
@@ -51,9 +47,7 @@
             name="password"
         />
 
-        @error('password')
-            <p class="text-red-500 text-sm">{{ $message }}</p>
-        @enderror
+        <x-input-error field="password" />
     </div>
 
     <div class="space-y-2">
@@ -61,7 +55,7 @@
 
         <input
             type="password"
-            placeholder="Password de Registro"
+            placeholder="Repite tu Password"
             class="w-full border border-gray-300 p-3 rounded-lg"
             name="password_confirmation"
         />

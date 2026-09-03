@@ -5,18 +5,26 @@
 @endsection
 
 @section('auth-contents')
-<form class="space-y-5" novalidate>
+@if (session('error'))
+    <x-alert type="error" :message="session('error')" />
+@endif
+
+<form method="POST" action="{{ route('login.store') }}" class="space-y-5" novalidate>
     <div class="flex flex-col gap-2">
         <label class="font-bold text-2xl" for="email">Email</label>
 
         <input
             id="email"
             type="email"
+            autofocus
             placeholder="Email de Registro"
             class="w-full border border-gray-300 p-3 rounded-lg"
             name="email"
+            value="{{ old('email') }}"
             tabindex="1"
         />
+
+        <x-input-error field="email" />
     </div>
 
     <div class="flex flex-col gap-2">
@@ -31,6 +39,8 @@
             name="password"
             tabindex="2"
         />
+
+        <x-input-error field="password" />
     </div>
     <input
         type="submit"

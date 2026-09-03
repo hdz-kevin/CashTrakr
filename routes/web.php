@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => view('welcome'))->name('home');
 
-Route::get('/dashboard', fn () => view('dashboard'))->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', fn () => view('dashboard'))
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-Route::get('/register', [RegisterController::class, 'create'])->name('register');
+Route::get('/auth/register', [RegisterController::class, 'create'])->name('register');
+Route::post('/auth/register', [RegisterController::class, 'store'])->name('register.store');
 
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-
-Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::get('/auth/login', [LoginController::class, 'create'])->name('login');
+Route::post('/auth/login', [LoginController::class, 'store'])->name('login.store');
 
 Route::get('verification/notice', fn () => view('auth.verify-email'))
     ->middleware(['auth'])
