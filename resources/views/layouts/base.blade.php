@@ -22,18 +22,23 @@
                     <img src="{{ asset('images/logo.svg') }}" alt="CashTrackr Logo" class="w-full block">
                 </div>
                 <nav class="flex flex-col lg:flex-row gap-4 items-center">
-                    <a
-                        href="{{ route('login') }}"
-                        class="font-bold uppercase {{ Route::currentRouteName() === 'login' ? 'text-amber-500' : 'hover:text-amber-500' }}"
-                    >
-                        Iniciar Sesión
-                    </a>
-                    <a
-                        href="{{ route('register') }}"
-                        class="font-bold uppercase {{ Route::currentRouteName() === 'register' ? 'text-amber-500' : 'hover:text-amber-500' }}"
-                    >
-                        Crear Cuenta
-                    </a>
+                    @auth
+                        <p class="font-medium text-lg">Hola, {{ auth()->user()->name }}</p>
+                    @endauth
+                    @guest
+                        <a
+                            href="{{ route('login') }}"
+                            class="font-bold uppercase {{ Route::currentRouteName() === 'login' ? 'text-amber-500' : 'hover:text-amber-500' }}"
+                        >
+                            Iniciar Sesión
+                        </a>
+                        <a
+                            href="{{ route('register') }}"
+                            class="font-bold uppercase {{ Route::currentRouteName() === 'register' ? 'text-amber-500' : 'hover:text-amber-500' }}"
+                        >
+                            Crear Cuenta
+                        </a>
+                    @endguest
                 </nav>
             </div>
         </header>
