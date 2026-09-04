@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -25,11 +26,11 @@ Route::post('/auth/register', [RegisterController::class, 'store'])->name('regis
 Route::get('/auth/login', [LoginController::class, 'create'])->name('login');
 Route::post('/auth/login', [LoginController::class, 'store'])->name('login.store');
 
-Route::get('verification/notice', fn () => view('auth.verify-email'))
+Route::get('/email/verify', fn () => view('auth.verify-email'))
     ->middleware(['auth'])
     ->name('verification.notice');
 
-Route::get('/verification/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
     return redirect()
@@ -38,3 +39,11 @@ Route::get('/verification/verify/{id}/{hash}', function (EmailVerificationReques
 })
     ->middleware(['auth', 'signed'])
     ->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return redirect()->route('verification.notice')->with('success', 'Se reenvió el email de confirmación');
+})
+    ->middleware(['auth', 'throttle:1,1'])
+    ->name('verification.send');

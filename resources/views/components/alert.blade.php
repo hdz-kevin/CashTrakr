@@ -1,4 +1,4 @@
-@props(['type' => 'success', 'message' => ''])
+@props(['type' => 'success', 'message' => '', 'class' => ''])
 
 @php
     $classes = [
@@ -7,6 +7,6 @@
     ];
 @endphp
 
-<div class="text-center px-4 py-3 mb-10 border-l-4 text-sm font-bold uppercase {{ $classes[$type] }}">
+<div class="text-center px-4 py-3 border-l-4 text-sm font-bold uppercase {{ $classes[$type] }} {{ $class }}">
     {{ $message }}
 </div>
